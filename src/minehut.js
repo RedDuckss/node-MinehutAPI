@@ -33,7 +33,6 @@ class MinehutAPI {
 			});
 			
 			const session = JSON.parse(request.body);
-
 			this.session = session;
 			return session;
 		} catch (error) {
@@ -96,7 +95,8 @@ class MinehutAPI {
 					accept: 'application/json',
 					origin: 'https://minehut.com',
 					'Content-Type': 'application/json',
-					authorization: this.session.token
+					'authorization': this.session.token,
+					"x-session-id": this.session.sessionId
 				},
 				body: JSON.stringify({
 					name,
@@ -218,7 +218,8 @@ class MinehutAPI {
 			request_url = `${API_BASE}/plugins`;
 			options = {
 				headers: {
-					'authorization': this.session.token
+					'authorization': this.session.token,
+					"x-session-id": this.session.sessionId
 				}
 			};
 		}
@@ -246,7 +247,8 @@ class MinehutAPI {
 		try {
 			const request = await got(`${API_BASE}/user/${id}`, {
 				headers: {
-					'authorization': this.session.token
+					'authorization': this.session.token,
+					"x-session-id": this.session.sessionId
 				}
 			});
 
